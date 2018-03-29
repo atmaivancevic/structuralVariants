@@ -1,0 +1,140 @@
+\documentclass[a4paper,11pt]{article} % Default font size and paper size
+
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{enumitem}
+\usepackage{amsmath, amssymb}
+\usepackage[normalem]{ulem}
+\usepackage{graphicx}
+\usepackage{lipsum}
+% Add quotes
+\usepackage{csquotes}
+\usepackage{color,hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue}
+
+\definecolor{cornflowerblue}{rgb}{0.39,0.58,0.93}
+
+\renewcommand{\thesection}{\arabic{section}}
+%\usepackage{titlesec} % Used to customize the \section command
+%\titleformat{\section}{\large\raggedright\bfseries}{}{0em}{} % Text formatting of sections
+%\titleformat{\subsection}{\large\raggedright\bfseries}{}{0em}{} % Text formatting of sections
+%\titlespacing{\section}{0pt}{10pt}{7pt} % Spacing around sections
+%\def\labelitemi{--}
+
+% Add bulltes
+\usepackage{outlines}
+
+%\pagestyle{empty} % Removes page numbering
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,277mm},
+	left=20mm,
+	top=20mm,
+	bottom=30mm,
+	right=20mm,
+}
+
+\newenvironment{tightcenter}{%
+	\setlength\topsep{0pt}
+	\setlength\parskip{0pt}
+	\begin{center}
+	}{%
+\end{center}
+}
+% Add url
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\begin{document} 
+
+
+\noindent \textbf{\Large \title*{Structural Variant Calling for Whole Genome Sequences}}
+\\
+
+\noindent Atma Ivancevic \href{mailto:atma.ivancevic@adelaide.edu.au}{atma.ivancevic@adelaide.edu.au} \\
+\textbf{Date created:} March 28, 2018 \\
+\textbf{Date updated:} \today \\
+
+\noindent \textbf{\large{\color{red}{WARNING: This pipeline is a work in progress. Some things may break as things change. Please let me know if this happens.}}}
+
+\section*{Protocol Requirements:}
+	\begin{outline}
+		\1 This protocol is designed for use on a high-performance computer with SLURM queuing (e.g. \href{https://wiki.adelaide.edu.au/hpc}{wiki.adelaide.edu.au/hpc}).
+		Scripts can be modified for use on a sufficiently powerful local computer.
+
+		\1 You will need WGS bam files and the human reference genome.
+			\2 We currently use hg19.
+	\end{outline}
+
+\section*{Step 1: Set up your files and work environment}
+	\begin{outline}
+		\1 This pipeline assumes all of your BAMs are in the same directory. If this is not the case, consider creating a new directory with symlinks to your BAMs. 
+		E.g.:
+		\begin{verbatim}
+			mkdir /data/genomes
+			cd /data/genomes
+			ln -s /path/to/bam link_name
+		\end{verbatim}
+
+		\1 All BAM files need to be indexed. 
+		This can be done with \href{http://www.htslib.org/}{SAMtools}.
+		\begin{verbatim}
+			samtools index bam_file
+		\end{verbatim}
+		
+		\textit{\textbf{\color{cornflowerblue}{To quickly index many BAMs, try using indexBAM.sh.}}}
+		
+		\1 Set up folders for your output and log files.
+		You can do this however you like. 
+		
+		This is how I set mine up:
+		
+		
+		\begin{verbatim}
+			# General output dir:
+			$FASTDIR/outputs
+		
+			# Output dir for SV calling:
+			$FASTDIR/outputs/SVcalling
+				
+			# Output dirs for each SV caller:
+			$FASTDIR/outputs/SVcalling/dellyOut
+			$FASTDIR/outputs/SVcalling/lumpyOut
+			$FASTDIR/outputs/SVcalling/mantaOut
+				
+			# Dir for SLURM output:
+			$FASTDIR/slurmOUT
+			# Dir for SLURM logs: 
+			$FASTDIR/slurmLOG
+		\end{verbatim}
+		
+		\1 Download and install SV callers.
+		Best practice is to use the latest stable version of each tool. 
+		You can put executables in your PATH, or redirect to a dedicated ``executables'' directory. 
+		
+		\2 \href{https://github.com/dellytools/delly}{Delly}
+		\2 \href{https://github.com/arq5x/lumpy-sv}{Lumpy}
+		\2 \href{https://github.com/Illumina/manta}{Manta}
+		
+	\end{outline}
+
+\section*{Step 2: Set off SV calling phase for each caller}
+	\begin{outline}
+	
+	\1 Delly first. An example command for SV calling is:
+	\begin{verbatim}
+		delly call -g hg19.fa -o s1.bcf -x hg19.excl sample.bam
+	\end{verbatim}
+	
+	\textit{\textbf{\color{cornflowerblue}{Use dellyCalling.sh to run on many genomes.
+	You will need the reference genome (e.g. ucsc.hg19.fasta) and tsv file of regions to exclude (ucsc.hg19.excl.tsv).}}}
+
+	
+	\end{outline}
+
+\end{document}
