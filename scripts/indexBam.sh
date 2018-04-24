@@ -7,7 +7,6 @@
 ## INDIR=/data/neurogenetics/alignments/Illumina/genomes/allGenomes_chr10 sbatch --array 0-125 indexBam.sh
 
 #SBATCH -J indexBam
-#SBATCH -o /fast/users/$USER/slurmOUT/indexBam/slurm-%A_%a.out
 
 #SBATCH -A robinson
 #SBATCH -p batch
