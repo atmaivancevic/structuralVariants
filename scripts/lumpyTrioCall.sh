@@ -5,7 +5,7 @@
 ## Date: 24 April 2018 
 ##
 ## Example usage:
-## INBAM1=/data/neurogenetics/alignments/Illumina/genomes/CP/FR07959117/FR07959117.5.bam INBAM2=/data/neurogenetics/alignments/Illumina/genomes/CP/FR07959116/FR07959116.5.bam INBAM3=/data/neurogenetics/alignments/Illumina/genomes/CP/FR07959115/FR07959115.5.bam PREFIX=FR07959117_FR07959116_FR07959115 sbatch lumpyTrioCalling.sh
+## INBAM1=/data/neurogenetics/alignments/Illumina/genomes/CP/FR07959117/FR07959117.5.bam INBAM2=/data/neurogenetics/alignments/Illumina/genomes/CP/FR07959116/FR07959116.5.bam INBAM3=/data/neurogenetics/alignments/Illumina/genomes/CP/FR07959115/FR07959115.5.bam PREFIX=FR07959117_FR07959116_FR07959115 sbatch lumpyTrioCall.sh
 
 #SBATCH -A robinson
 #SBATCH -p batch

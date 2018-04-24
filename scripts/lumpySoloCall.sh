@@ -5,7 +5,7 @@
 ## Date: 24 April 2018 
 ##
 ## Example usage:
-## INBAM1=/data/neurogenetics/alignments/Illumina/genomes/allGenomes_chr10/NA12878_chr10.bam PREFIX=NA12878_chr10 sbatch lumpySoloCalling.sh
+## INBAM1=/data/neurogenetics/alignments/Illumina/genomes/allGenomes_chr10/NA12878_chr10.bam PREFIX=NA12878_chr10 sbatch lumpySoloCall.sh
 
 #SBATCH -A robinson
 #SBATCH -p batch
