@@ -4,7 +4,7 @@
 ## Date: 28 March 2018 
 ##
 ## Example usage:
-## INDIR=/data/neurogenetics/alignments/Illumina/genomes/allGenomes_chr10 sbatch --array 0-125 dellyCalling.sh
+## INDIR=/data/neurogenetics/alignments/Illumina/genomes/allGenomes_chr10 sbatch --array 0-125 dellyCall.sh
 
 #SBATCH -A robinson
 #SBATCH --qos=long
