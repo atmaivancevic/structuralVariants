@@ -1,0 +1,7 @@
+Run in this order:
+
+1) dellyCall.sh -> dellyMerge.sh -> dellyGenotype.sh -> bcftoolsMerge.sh -> dellyGermlineFilter.sh
+
+2) lumpySoloCall.sh or lumpyTrioCall.sh (depending on whether or not you have trio data)
+
+3) mantaSoloCall.sh or mantaTrioCall.sh (as above)
