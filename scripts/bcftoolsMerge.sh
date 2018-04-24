@@ -22,7 +22,7 @@
 module load BCFtools/1.3.1-GCC-5.3.0-binutils-2.25
 
 # run the thing
-echo $(date +"[%b %d %H:%M:%S] Got to dir")
+echo $(date +"[%b %d %H:%M:%S] Go to dir")
 cd $INDIR
 pwd
 
