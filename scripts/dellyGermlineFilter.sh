@@ -39,4 +39,7 @@ bcftools index merged.bcf
 echo $(date +"[%b %d %H:%M:%S] Apply delly germline filter")
 $DELLYEXE filter -f germline -o germline.bcf merged.bcf
 
+echo $(date +"[%b %d %H:%M:%S] Also output vcf")
+bcftools view germline.bcf > germline.vcf
+
 echo $(date +"[%b %d %H:%M:%S] All done!")
