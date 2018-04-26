@@ -19,6 +19,9 @@
 #SBATCH --mail-type=FAIL                                        
 #SBATCH --mail-user=%u@adelaide.edu.au
 
+# set variables
+DELLYEXE=$FASTDIR/executables/delly-0.7.8/delly_v0.7.8_parallel_linux_x86_64bit
+
 # run the thing
 echo $(date +"[%b %d %H:%M:%S] Go to dir")
 cd $INDIR
@@ -28,6 +31,6 @@ echo $(date +"[%b %d %H:%M:%S] Check for merged bcf")
 ls merged.bcf
 
 echo $(date +"[%b %d %H:%M:%S] Apply delly germline filter")
-delly filter -f germline -o germline.bcf merged.bcf
+$DELLYEXE filter -f germline -o germline.bcf merged.bcf
 
 echo $(date +"[%b %d %H:%M:%S] All done!")
