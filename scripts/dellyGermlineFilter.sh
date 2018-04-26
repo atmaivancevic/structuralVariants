@@ -22,6 +22,9 @@
 # set variables
 DELLYEXE=$FASTDIR/executables/delly-0.7.8/delly_v0.7.8_parallel_linux_x86_64bit
 
+# load modules
+module load BCFtools/1.3.1-GCC-5.3.0-binutils-2.25
+
 # run the thing
 echo $(date +"[%b %d %H:%M:%S] Go to dir")
 cd $INDIR
@@ -29,6 +32,9 @@ pwd
 
 echo $(date +"[%b %d %H:%M:%S] Check for merged bcf")
 ls merged.bcf
+
+echo $(date +"[%b %d %H:%M:%S] Index bcf")
+bcftools index merged.bcf
 
 echo $(date +"[%b %d %H:%M:%S] Apply delly germline filter")
 $DELLYEXE filter -f germline -o germline.bcf merged.bcf
