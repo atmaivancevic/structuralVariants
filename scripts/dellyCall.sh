@@ -4,14 +4,14 @@
 ## Date: 28 March 2018 
 ##
 ## Example usage:
-## INDIR=/data/neurogenetics/alignments/Illumina/genomes/allGenomes_chr10 sbatch --array 0-125 dellyCall.sh
+## INDIR=/data/neurogenetics/alignments/Illumina/genomes/allGenomes sbatch --array 0-126 dellyCall.sh
 
 #SBATCH -A robinson
 #SBATCH --qos=long
 #SBATCH -N 1
 #SBATCH -n 8
 #SBATCH --time=7-00:00
-#SBATCH --mem=8GB
+#SBATCH --mem=32GB
 
 # Notification configuration 
 #SBATCH --mail-type=END                                         
