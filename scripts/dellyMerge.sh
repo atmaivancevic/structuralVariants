@@ -35,6 +35,6 @@ bcfList=$(find *.bcf)
 echo $bcfList
 
 echo $(date +"[%b %d %H:%M:%S] Merge all bcfs")
-$DELLYEXE merge -o sites.bcf $bcfList
+$DELLYEXE merge -n 100000000 -o sites.bcf $bcfList
 
 echo $(date +"[%b %d %H:%M:%S] All done!")
