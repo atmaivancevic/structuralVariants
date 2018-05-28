@@ -25,6 +25,9 @@ DELLYEXE=$FASTDIR/executables/delly-0.7.8/delly_v0.7.8_parallel_linux_x86_64bit
 OUTDIR=$FASTDIR/outputs
 GENOMEDIR=$FASTDIR/references/genomes
 
+# load modules
+module load BCFtools/1.3.1-GCC-5.3.0-binutils-2.25 
+
 # run the thing
 echo $(date +"[%b %d %H:%M:%S] Got to dir")
 cd $INDIR
