@@ -4,6 +4,7 @@
 ## Date: 4 June 2018 
 ##
 ## Example usage: ./scoreSVs.sh
+## You will need the latest version of SVScore: https://github.com/lganel/SVScore
 
 # remove chr perfix (for SVscore, which cannot have prefix)
 cat germline.vcf | sed 's/chr//g' > germline_noPrefix.vcf
