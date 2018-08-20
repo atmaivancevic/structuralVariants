@@ -15,7 +15,7 @@
 #SBATCH --mail-user=%u@adelaide.edu.au
 
 # directories 
-ref=/data/neurogenetics/RefSeq/ucsc.hg19.fasta
+CHROMDIR=/data/neurogenetics/RefSeq/chromosomes/
 
 # define query bam files
 QUERIES=($(ls $INDIR/*.bam | xargs -n 1 basename))
@@ -27,7 +27,7 @@ module load CNVnator/0.3.2-GCC-4.9.3-binutils-2.25
 
 # run the thing
 
-### SV discovery/calling phase ###
+### CNV discovery/calling phase ###
 echo $(date +"[%b %d %H:%M:%S] Starting cnvnator")
 echo "Processing file: "${QUERIES[$SLURM_ARRAY_TASK_ID]}
 
@@ -39,7 +39,7 @@ cnvnator -root ${QUERIES[$SLURM_ARRAY_TASK_ID]}.root \
 echo "Generating a histogram..."
 
 cnvnator -root ${QUERIES[$SLURM_ARRAY_TASK_ID]}.root \
--his 100
+-his 100 -d $CHROMDIR
 
 echo "Calculating stats..."
 
@@ -61,7 +61,7 @@ cnvnator -root ${QUERIES[$SLURM_ARRAY_TASK_ID]}.root \
 
 echo "Converting to VCF format..."
 
-cnvnator2VCF.pl ${OUTDIR}/${QUERIES[$SLURM_ARRAY_TASK_ID]}.out $ref \
+cnvnator2VCF.pl ${OUTDIR}/${QUERIES[$SLURM_ARRAY_TASK_ID]}.out $CHROMDIR \
 > ${OUTDIR}/${QUERIES[$SLURM_ARRAY_TASK_ID]}.vcf
 
 echo $(date +"[%b %d %H:%M:%S] All done!")
