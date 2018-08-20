@@ -4,7 +4,7 @@
 ## Date: 24 April 2018 
 ##
 ## Example usage:
-## INDIR=/data/neurogenetics/alignments/Illumina/genomes/allGenomes_chr10 SITELIST=/fast/users/a1211880/outputs/SVcalling/dellyOut/sites.bcf sbatch --array 0-125 dellyGenotype.sh
+## INDIR=/data/neurogenetics/alignments/Illumina/genomes/allGenomes SITELIST=/fast/users/a1211880/outputs/SVcalling/dellyOut/sites.bcf sbatch --array 0-125 dellyGenotype.sh
 
 #SBATCH -A robinson
 #SBATCH --qos=long
