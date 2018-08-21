@@ -1,13 +1,14 @@
 #!/bin/bash  
 
+# Example usage:
+# INDIR=/data/neurogenetics/alignments/Illumina/genomes/allGenomes OUTDIR=/fast/users/a1211880/outputs/SVcalling/cnvnatorOut sbatch --array 0-159 cnvnatorCall.sh
+
 #SBATCH -A robinson
 #SBATCH -p batch
 #SBATCH -N 1
 #SBATCH -n 12
 #SBATCH --time=10:00:00
 #SBATCH --mem=32GB
-
-# INDIR=/data/neurogenetics/alignments/Illumina/genomes/allGenomes OUTDIR=/fast/users/a1211880/outputs/SVcalling/cnvnatorOut sbatch --array 0-159 cnvnatorCall.sh
 
 # Notification configuration 
 #SBATCH --mail-type=END                                         
@@ -31,27 +32,27 @@ module load CNVnator/0.3.2-GCC-4.9.3-binutils-2.25
 echo $(date +"[%b %d %H:%M:%S] Starting cnvnator")
 echo "Processing file: "${QUERIES[$SLURM_ARRAY_TASK_ID]}
 
-echo "Extracting read mapping from BAM files..."
+echo $(date +"[%b %d %H:%M:%S] Extracting read mapping from BAM files...")
 
 cnvnator -root ${QUERIES[$SLURM_ARRAY_TASK_ID]}.root \
 -tree ${INDIR}/${QUERIES[$SLURM_ARRAY_TASK_ID]}
 
-echo "Generating a histogram..."
+echo $(date +"[%b %d %H:%M:%S] Generating a histogram...")
 
 cnvnator -root ${QUERIES[$SLURM_ARRAY_TASK_ID]}.root \
 -his 100 -d $CHROMDIR
 
-echo "Calculating stats..."
+echo $(date +"[%b %d %H:%M:%S] Calculating stats...")
 
 cnvnator -root ${QUERIES[$SLURM_ARRAY_TASK_ID]}.root \
 -stat 100
 
-echo "Patitioning..."
+echo $(date +"[%b %d %H:%M:%S] Partitioning...")
 
 cnvnator -root ${QUERIES[$SLURM_ARRAY_TASK_ID]}.root \
 -partition 100
 
-echo "Calling CNVs..."
+echo $(date +"[%b %d %H:%M:%S] Calling CNVs...")
 
 cnvnator -root ${QUERIES[$SLURM_ARRAY_TASK_ID]}.root \
 -call 100 \
@@ -59,7 +60,7 @@ cnvnator -root ${QUERIES[$SLURM_ARRAY_TASK_ID]}.root \
 > ${OUTDIR}/${QUERIES[$SLURM_ARRAY_TASK_ID]}.out \
 2> ${OUTDIR}/${QUERIES[$SLURM_ARRAY_TASK_ID]}.log
 
-echo "Converting to VCF format..."
+echo $(date +"[%b %d %H:%M:%S] Converting to VCF format...")
 
 cnvnator2VCF.pl ${OUTDIR}/${QUERIES[$SLURM_ARRAY_TASK_ID]}.out $CHROMDIR \
 > ${OUTDIR}/${QUERIES[$SLURM_ARRAY_TASK_ID]}.vcf
