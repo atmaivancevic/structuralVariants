@@ -8,4 +8,6 @@ Run in this order:
 
 4) cnvnatorCall.sh (very quick calling for large dups and dels)
 
-5) retroseq.sh (mobile elements)
+5) retroseq.sh (specifically for mobile element calling)
+ 
+6) meltCall.sh (another mobile element caller)
