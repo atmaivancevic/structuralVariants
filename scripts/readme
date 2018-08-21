@@ -5,3 +5,7 @@ Run in this order:
 2) lumpySoloCall.sh or lumpyTrioCall.sh (depending on whether or not you have trio data)
 
 3) mantaSoloCall.sh or mantaTrioCall.sh (as above) -> mantaCleanup.sh
+
+4) cnvnatorCall.sh (very quick calling for large dups and dels)
+
+5) retroseq.sh (mobile elements)
